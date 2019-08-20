@@ -15,7 +15,7 @@
 + ### git 설치    
   * http://msysgit.github.com/ 
   * 설치완료후 GIT 폴더로 가서 'git-bash.exe'를 실행합니다.
-    ![설치2](./github/실행화면.png)
+    ![설치2](./git1/실행화면.png)
     -> 위 화면이 실행되면 git 설치 완료입니다.
 
 + ### git 환경설정
