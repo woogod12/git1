@@ -15,23 +15,23 @@
 + ### git 설치    
   * http://msysgit.github.com/ 
   * 설치완료후 GIT 폴더로 가서 'git-bash.exe'를 실행합니다.
-    ![설치2](./실행화면.png)
+    ![설치2](./github/실행화면.png)
     -> 위 화면이 실행되면 git 설치 완료입니다.
 
 + ### git 환경설정
   + git config 설정  
     + 사용자 설정 git을 commit할때 입력되는 사용자의 이메일과 이름 정보를 등록합니다.<br>
       ``` 
-      git config --global user.name 'name'
-      git config --global user.email example@gmail.com
+      $ git config --global user.name 'name'
+      $ git config --global user.email example@gmail.com
       ```
     + 주로 사용할 텍스트 편집기를 입력합니다.
 
-          git config --global core.editor (편집기이름)
+          $ git config --global core.editor (편집기이름)
 
     + git config 설정 확인을 통해 user.name과 email을 확인합니다.
 
-          git config --list
+          $ git config --list
 
 ---
 ## **3. Git 저장소 만들기**
@@ -42,7 +42,7 @@
   + ### git clone
     + git clone 명령을 실행하면 프로젝트 히스토리를 전부 받아옵니다.   
 
-          git clone (가저올 저장소 url)
+          $ git clone (가저올 저장소 url)
 
 ---
 ## **4. Git 수정하고 저장소에 저장하기**
@@ -50,18 +50,18 @@
   + ### git status
     + 파일의 상태를 확인하는 명령어로 처음 실행하면 아래와 같은 메시지가 나온다.  
 
-          git status
+          $ git status
           On branch master
           nothing to commit, working directory clean
 
   + ### git add
     + git add 명령으로 파일을 새로 추적합니다.  
 
-          git add (추적할파일)  
+          $ git add (추적할파일)  
 
     + git add를 한후 git status 명령을 다시 실행하면 (추적할파일)이 Tracked 상태이면서 Staged 상태라는 것을 확인 할 수 있습니다.
 
-          git status
+          $ git status
           On branch master
           changes to be committed:
             (us "git reset HEAD ..." to unstage)
@@ -72,10 +72,10 @@
   + ### git commit
     + 커밋을 실행하면 변경된 파일이 HEAD에 반영됩니다.
 
-           git commit -m "변경된 메시지 내용 입력"  
+          $ git commit -m "변경된 메시지 내용 입력"  
     + git add 명령 실행 이후에 수정한 파일까지 한번에 커밋하기 위한 명령어 
     
-          git commit -am "커밋 메시지 내용"
+          $ git commit -am "커밋 메시지 내용"
  
   + ### git log
     + git log 명령을 통해 버전이 기록됨을 확인 할 수 있습니다. 
@@ -85,21 +85,20 @@
   + ### git remote
     + 원격 저장소를 이용하기 위해 git 에게 아래 명령어로 원격 서버의 주소를 알려줍니다.
 
-          git remote add origin <원격 서버 주소>
+          $ git remote add origin <원격 서버 주소>
         -> 여기서 origin은 원격저장소의 별칭입니다.
 
   + ### git push
     + 최신 커밋 사항을 git repository에 올리기 위해서 사용하는 명령어 입니다.
 
-          git push - u orgin master
+          $ git push -u orgin master
 
-        -> 여기서 - u 는 원격저장소로부터 업데이트를 받은후 push를 한다는 의미입니다.
-<<<<<<< HEAD
+        -> 여기서 -u 는 원격저장소로부터 업데이트를 받은후 push를 한다는 의미입니다.
 
 ---
 ## **6. Git branch**
   + ### 브랜치란?
-    + 코드 전체를 복사해서 마스터 코드와 별개로 독립적 개발하는 것을 브랜치라고 합니다. 
+    + 코드 전체를 복사해서 기존코드와 별개로 독립적 개발하는 것을 브랜치라고 합니다. 
   + ### git branch
     + 브랜치 이름을 생성하고 그 브랜치로 이동하는 명령어입니다.
 
@@ -110,13 +109,49 @@
 
   + ### git merge
     + 생성된 브랜치를 병합하는 명령어입니다.
-    + 처음 명령어는 생성된 브랜치를 마스터로 이동한것이고 두번째 명령어를 실행하면 생성된 브랜치를 마스터로 합치게 됩니다. 
+    + 처음 명령어는 생성된 브랜치를 마스터(원격저장소)로 이동한것이고 두번째 명령어를 실행하면 생성된 브랜치를 마스터(원격저장소)로 합치게 됩니다. 
 
           $ git merge (브랜치명) master
           $ git merge master (브랜치명)
+  + ### git merge conflict
+    + merge중 충돌이 나는 상황을 해결하는 방법입니다. 먼저 충돌이 나는 상황을 예시로 들어보겠습니다.
+      + master(기존저장소)에서 실험 txt 파일을 생성합니다. 그리고 해당파일을 적재하고 커밋합니다.
+      + 새로운 브랜치를 만들어 똑같은 작업을 반복합니다. 
+      + 다시 master(기존저장소)로 이동해서 실험 txt 파일을 수정하고 커밋합니다. 
+      + 위 과정이 끝나면 master(기존저장소)에서 같은작업을한 브랜치를 merge 합니다.
+      + 아래 문구가 나오면 merge conflict 상황이 완성된겁니다.
+
+            Auto-merging merge/m1.txt
+            CONFLICT (content): Merge conflict in merge/m1.txt
+            Automatic merge failed; fix conflicts and then commit the result.
+
+
+    + merge 툴을 활용하여 해결하기 때문에 (사용할) mergetool을 설정해야 합니다. 
+
+          $ git config --global merge.tool (사용할tool이름)
+          $ git config --global --add mergetool.(사용할tool이름).path "(사용할tool path)"
+          $ git config --global --add mergetool.(사용할tool이름).trustExitCode false
+
+    + 위 설정이 끝나면 master(기존저장소) 브랜치로 이동하여 아래 명령어를 입력해서 tool을 실행합니다.
+
+          $ git mergetool
+
+
+          
+
+
 
 ---
 ## **7. Git 기타명령어**
+  + ### git diff 설정
+    + git diff 는 커밋간의 HEAD와 워킹 디렉토리의 차이점을 보여줍니다.
+    + difftool 설정을 통해 보다 쉽게 비교가 가능합니다.
+
+          $ git config --global diff.tool (사용할tool이름)
+          $ git config --global --add gitdifftool.kdiff3.path "C:\Program Files\KDiff3\kdiff3.exe"
+          $ git config --global --add difftool.kdiff3.trustExitCode false
+            
+
   + ### git commit --amend
     + 커밋을 수정할때 쓰는 명령어 입니다. 완료한 커밋을 수정하거나 커밋 메시지를 수정할때 사용합니다. 
             
@@ -147,47 +182,21 @@
       $ git remote -v 
         -> 원격 저장소 주소 확인
         ```
-=======
-         
----
-## **6. Git branch**
-  + ### 브랜치란?
-  + ### git branch
-  + ### git merge
----
-## **7. Git 기타명령어**
-  + ### git commit --amend
-  + ### .gitignore
->>>>>>> 2e2125458069008034f660fd318b243aef5da1f1
 ---
 ## **8. Tips & Etc**
   + ### 이슈해결
      + git 초기설정 오류시 전체 초기화 방법
-<<<<<<< HEAD
      + git clean -i 명령어를 수행하고 c를 입력하면 전체 초기화를 실행합니다.
    ![clean](./clean.png)
 
-=======
-   ![clean](./clean.png)
-
-       > git clean -i 명령어를 수행하고 c를 입력하면 전체 초기화를 실행합니다.
-
->>>>>>> 2e2125458069008034f660fd318b243aef5da1f1
   + ### Github 연동
     + GitHub에 로컬에서 만든 git을 저장하기 위해서는 GitHub의 계정을 만들고 저장할 repository가 필요합니다. 계정과 repository를 생성해주세요.
 
       ![hub](./github.png)
-<<<<<<< HEAD
     + 생성한 GitHub repository로 로컬 git 연결을 위해 remote add 명령어를  사용합니다. 여기서 origin은 원격저장소의 별칭입니다.  
 
       ![push](./gitpush.png)
     + git push 명령어를 통해서 로컬저장소와 원격저장소를 동기화 시켜줍니다.
-=======
-      > + 생성한 GitHub repository로 로컬 git 연결을 위해 remote add 명령어를  사용합니다. 여기서 origin은 원격저장소의 별칭입니다.  
-
-      ![push](./gitpush.png)
-      > + git push 명령어를 통해서 로컬저장소와 원격저장소를 동기화 시켜줍니다.
->>>>>>> 2e2125458069008034f660fd318b243aef5da1f1
       완료되었으면 github의 자신이 생성한 repository에 로컬에서 생성한 파일들이 업로드 되어 있음을 확인할수 있습니다.
 
       ![re](./gitre.png)  
